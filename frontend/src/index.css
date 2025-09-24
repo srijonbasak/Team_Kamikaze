@@ -1,6 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light dark; }
-body { @apply bg-gray-50 text-gray-900; }
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+:root { 
+  color-scheme: dark;
+  --bg: #0B0F17;
+  --surface: #0F1420;
+  --border: #1E2638;
+  --text: #E6EAF2;
+  --muted: #A7B0C0;
+  
+  /* Default theme colors (can be overridden) */
+  --primary: #FF2E63;
+  --primary-hover: #E22657;
+  --accent: #F72585;
+  --glow: #FF2E63;
+}
+
+.theme-evil,
+:root {
+  --primary: #FF2E63;
+  --primary-hover: #E22657;
+  --accent: #F72585;
+  --glow: #FF2E63;
+}
+
+.theme-good {
+  --primary: #28F7D1;
+  --primary-hover: #1ED8B7;
+  --accent: #14FFEC;
+  --glow: #28F7D1;
+}
+
+body { 
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom animations */
+@keyframes grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Neon glow utility */
+.neon-glow {
+  box-shadow: 0 0 20px var(--glow, #FF2E63);
+}
+
+.neon-glow:hover {
+  box-shadow: 0 0 30px var(--glow, #FF2E63), 0 0 60px var(--glow, #FF2E63);
+}
+
+/* Button utilities */
+.btn-primary {
+  background-color: var(--primary, #FF2E63);
+  color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover, #E22657);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255, 46, 99, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--surface, #0F1420);
+  color: var(--text, #E6EAF2);
+  border: 1px solid var(--border, #1E2638);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--border, #1E2638);
+}
+
+/* Custom gradients for themes */
+.gradient-evil {
+  background: linear-gradient(135deg, #3A0CA3 0%, #F72585 50%, #FF2E63 100%);
+}
+
+.gradient-good {
+  background: linear-gradient(135deg, #00B4D8 0%, #14FFEC 50%, #28F7D1 100%);
+}
+
+/* Ensure proper text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force visibility and proper rendering */
+button, .btn-primary, .btn-secondary {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none !important;
+  outline: none;
+}
+
+/* Ensure backgrounds render */
+.bg-evil-primary { background-color: #FF2E63 !important; }
+.bg-good-primary { background-color: #28F7D1 !important; }
+.text-black { color: #000000 !important; }
+
+/* Hover states */
+.hover\:bg-evil-primary-hover:hover { background-color: #E22657 !important; }
+.hover\:bg-good-primary-hover:hover { background-color: #1ED8B7 !important; }
+
+/* Link fixes */
+a.no-underline { text-decoration: none !important; }
+a.no-underline:hover { text-decoration: none !important; }
+a.no-underline:focus { text-decoration: none !important; }
+a.no-underline:active { text-decoration: none !important; }
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}

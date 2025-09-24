@@ -1,23 +1,46 @@
-import { useState } from 'react'
-import Chat from './pages/Chat'
-import Trace from './pages/Trace'
-import Dashboard from './pages/Dashboard'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import Landing from './pages/Landing';
+import BlockerChat from './pages/BlockerChat';
+import GuardianChat from './pages/GuardianChat';
+import Docs from './pages/Docs';
+import { ToastContainer, useToast } from './components/ui/Toast';
+
+function AppRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Landing />} />
+        <Route path="/blocker" element={<BlockerChat />} />
+        <Route path="/guardian" element={<GuardianChat />} />
+        <Route path="/docs" element={<Docs />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 export default function App() {
-  const [tab, setTab] = useState<'chat'|'trace'|'dash'>('chat')
+  const { toasts, removeToast } = useToast();
+
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <header className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Gateway Social Control</h1>
-        <nav className="space-x-2">
-          <button onClick={()=>setTab('chat')} className={`px-3 py-1 rounded ${tab==='chat'?'bg-black text-white':'bg-gray-200'}`}>Chat</button>
-          <button onClick={()=>setTab('trace')} className={`px-3 py-1 rounded ${tab==='trace'?'bg-black text-white':'bg-gray-200'}`}>Trace</button>
-          <button onClick={()=>setTab('dash')} className={`px-3 py-1 rounded ${tab==='dash'?'bg-black text-white':'bg-gray-200'}`}>Dashboard</button>
-        </nav>
-      </header>
-      {tab==='chat' && <Chat />}
-      {tab==='trace' && <Trace />}
-      {tab==='dash' && <Dashboard />}
-    </div>
-  )
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
+      <div className="min-h-screen bg-cyber-bg text-cyber-text flex flex-col">
+        <NavBar />
+        <div className="flex-1">
+          <AppRoutes />
+        </div>
+        <Footer />
+        <ToastContainer toasts={toasts} onRemove={removeToast} />
+      </div>
+    </Router>
+  );
 }
