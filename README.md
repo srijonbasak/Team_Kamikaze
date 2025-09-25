@@ -1,4 +1,4 @@
-# Gateway v2.0
+# Team Kamikaze
 
 A two-part system:
 - Frontend (Vite + React + Tailwind) for the UI and chat-driven controls
